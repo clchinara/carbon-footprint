@@ -5,10 +5,12 @@
 import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { usePostPrediction } from './helpers/apiPost'
 
 const App = () => {
   const [url, setUrl] = useState('');
   const [imgUrl, setImgUrl] = useState('');
+  const { loading, isSuccess, isError, messageError, postPrediction, prediction } = usePostPrediction()
 
   useEffect(() => {
       const queryInfo = {active: true, lastFocusedWindow: true};
@@ -19,9 +21,23 @@ const App = () => {
       });
   }, []);
 
+  useEffect(() => {
+      if (isError) {
+          console.log(messageError)
+      }
+
+      if (isSuccess) {
+          console.log(prediction);
+      }
+  }, [prediction, isSuccess, isError, messageError])
+
   chrome.runtime.onMessage.addListener((request, sender) => {
       setImgUrl(request.message);
-      console.log('React imgUrl', imgUrl);
+      const param = {
+          image: request.message
+      };
+
+      postPrediction(param);
   })
 
   return (
