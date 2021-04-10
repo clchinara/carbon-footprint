@@ -24,6 +24,10 @@ const App = () => {
 
   }, []);
 
+  chrome.runtime.onMessage.addListener((request, sender) => {
+      setImgUrl(request.message);
+      console.log('React imgUrl', imgUrl);
+  })
 
   return (
       <div className="App">
