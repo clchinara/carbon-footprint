@@ -10,9 +10,6 @@ const App = () => {
   const [url, setUrl] = useState('');
   const [imgUrl, setImgUrl] = useState('');
 
-  /**
-   * Get current URL
-   */
   useEffect(() => {
       const queryInfo = {active: true, lastFocusedWindow: true};
 
@@ -20,8 +17,6 @@ const App = () => {
           const url = tabs[0].url;
           setUrl(url);
       });
-
-
   }, []);
 
   chrome.runtime.onMessage.addListener((request, sender) => {
@@ -31,13 +26,10 @@ const App = () => {
 
   return (
       <div className="App">
-          <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo"/>
-              <p>Carbon footprint:</p>
-              <p>
-                  {url}
-              </p>
-          </header>
+          <div className="container">
+                <div className="title"><strong>Carbon footprint</strong></div>
+                <div className="data">190kgCO2</div>
+          </div>
       </div>
   );
 };
