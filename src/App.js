@@ -12,22 +12,11 @@ const materialMap = {
 };
 
 const App = () => {
-  const [url, setUrl] = useState('0 kg CO2');
-  const [carbonFootprint, setCarbonFootprint] = useState('');
-
-  /**
-   * Get current URL
-   */
-  useEffect(() => {
-      const queryInfo = {active: true, lastFocusedWindow: true};
-
-      chrome.tabs && chrome.tabs.query(queryInfo, tabs => {
-          const url = tabs[0].url;
-          setUrl(url);
-      });
-  }, []);
+  const [carbonFootprint, setCarbonFootprint] = useState('0 kgCO2');
+  const [coba, setCoba] =  useState('');
 
   chrome.runtime.onMessage.addListener((request) => {
+    setCoba(request.message);
       const params = {
         inputs:[
           {
@@ -56,13 +45,13 @@ const App = () => {
                 const lastDigit = parseInt(lastDigitStr[1]) % 100;
                 const count = Math.round((lastDigit * materialMap[res[0].name]) * 100) / 100;
                 const result = count < 5 ? count + 10 : count;
-                setCarbonFootprint(`${result} kg CO2`)
+                setCarbonFootprint(`${result} kgCO2`)
             } else {
                 const lastDigitStr = prediction[0].value.toString().split('.');
                 const lastDigit = parseInt(lastDigitStr[1]) % 100;
                 const count = Math.round((lastDigit * 0.4) * 100) / 100
                 const result = count < 5 ? count + 10 : count;
-                setCarbonFootprint(`${result} kg CO2`)
+                setCarbonFootprint(`${result} kgCO2`)
             }
         }
       ).catch(err => {
@@ -71,13 +60,11 @@ const App = () => {
   });
 
   return (
-      <div className="App">
-          <header className="App-header">
-              <p>Carbon footprint:</p>
-              <p>
-                  {carbonFootprint}
-              </p>
-          </header>
+     <div className="App">
+        <div className="container">
+              <div className="title"><strong>Carbon footprint</strong></div>
+              <div className="data">{carbonFootprint}</div>
+        </div>
       </div>
   );
 };
