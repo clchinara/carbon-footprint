@@ -53,7 +53,8 @@ export const usePostPrediction = () => {
     if (!returnData?.status?.code) {
       isError = !returnData?.success;
       messageError = "An error has occured";
-    } else {
+    } 
+    else {
       isSuccess = returnData?.status?.code === 10000;
       output = returnData?.outputs[0]?.data?.concepts;
       imgUrl = returnData?.outputs[0]?.input?.data?.image?.url;

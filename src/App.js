@@ -10,16 +10,17 @@ import { usePostPrediction } from './helpers/apiPost'
 const App = () => {
   const [url, setUrl] = useState('');
   const [imgUrl, setImgUrl] = useState('');
+  const [predictions, setPredictions] = useState({});
   const { loading, isSuccess, isError, messageError, postPrediction, prediction } = usePostPrediction()
 
-  useEffect(() => {
-      const queryInfo = {active: true, lastFocusedWindow: true};
+//   useEffect(() => {
+//       const queryInfo = {active: true, lastFocusedWindow: true};
 
-      chrome.tabs && chrome.tabs.query(queryInfo, tabs => {
-          const url = tabs[0].url;
-          setUrl(url);
-      });
-  }, []);
+//       chrome.tabs && chrome.tabs.query(queryInfo, tabs => {
+//           const url = tabs[0].url;
+//           setUrl(url);
+//       });
+//   }, []);
 
   useEffect(() => {
       if (isError) {
@@ -38,6 +39,9 @@ const App = () => {
       };
 
       postPrediction(param);
+      if (!loading) {
+          console.log(prediction);
+      }
   })
 
   return (
