@@ -1,6 +1,6 @@
 # e-CO2mmurz
 
-A browser extension that informs user of the estimated carbon footprint values of e-commerce products
+A browser extension that informs users of the estimated carbon footprint values of e-commerce products
 
 ## Design
 ![e-CO2mmurz](https://github.com/clchinara/media-repo/blob/master/carbon-footprint/carbon-footprint.png)
