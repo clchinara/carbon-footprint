@@ -1,6 +1,9 @@
-# Getting Started with Create React App
+# e-CO2mmurz
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A browser extension that informs user of the estimated carbon footprint values of e-commerce products
+
+## Design
+![e-CO2mmurz](https://github.com/clchinara/media-repo/blob/master/carbon-footprint/carbon-footprint.png)
 
 ## Available Scripts
 
